@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Artista;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
+
 
 class InscripcionController extends Controller
 {
@@ -15,8 +18,23 @@ class InscripcionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('inscripciones');
+    {   
+        //$artistas = Artista::all();
+
+        $inscripciones = DB::table('inscripcion as ins')
+        ->join('artista as art','art.id','=','ins.artista_id')
+        ->join('obra as obr','obr.id','=','ins.obra_id')
+        ->select('ins.id as id_inscripcion',
+            'ins.created_at as fecha_inscripcion',
+            'art.nombre',
+            'art.apellido',
+            'obr.titulo',
+            'obr.tipo_obra',
+            'obr.valor_venta'
+            )
+        ->paginate(10);
+
+        return view('inscripciones', compact('inscripciones'));
     }
 
     /**
