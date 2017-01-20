@@ -17,10 +17,8 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        //$artistas = Artista::all();
-
         $inscripciones = DB::table('inscripcion as ins')
         ->join('artista as art','art.id','=','ins.artista_id')
         ->join('obra as obr','obr.id','=','ins.obra_id')
@@ -31,8 +29,14 @@ class InscripcionController extends Controller
             'obr.titulo',
             'obr.tipo_obra',
             'obr.valor_venta'
-            )
-        ->paginate(10);
+            );
+        if($request->nombre){
+            $inscripciones = $inscripciones->where('art.nombre', 'like', '%' . $request->nombre . '%');
+        }
+        if($request->apellido){
+            $inscripciones = $inscripciones->where('art.apellido', 'like', '%' . $request->apellido . '%');
+        }
+        $inscripciones = $inscripciones->paginate(10);
 
         return view('inscripciones', compact('inscripciones'));
     }
@@ -66,7 +70,20 @@ class InscripcionController extends Controller
      */
     public function show($id)
     {
-        //
+        $inscripcion = DB::table('inscripcion as ins')
+        ->join('artista as art','art.id','=','ins.artista_id')
+        ->join('obra as obr','obr.id','=','ins.obra_id')
+        ->select('ins.id as id_inscripcion',
+            'ins.created_at as fecha_inscripcion',
+            'art.nombre',
+            'art.apellido',
+            'obr.titulo',
+            'obr.tipo_obra',
+            'obr.valor_venta'
+            )
+        ->where('ins.id', '=', $id);
+
+        return view('inscripcion', compact('inscripcion'));
     }
 
     /**

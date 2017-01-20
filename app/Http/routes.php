@@ -15,4 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('inscripciones', 'InscripcionController@index');
+//Usando un alias para la ruta
+Route::get('inscripciones', ['uses' => 'InscripcionController@index', 'as' => 'inscripcion.index']);
+
+//De esta forma genera totas las rutas del resource del controlador
+//Route::resource('inscripciones', 'InscripcionController');
+
+//Route::get('inscripciones', 'InscripcionController@index');
+Route::get('inscripcion/{id}',['uses' => 'InscripcionController@show', 'as' => 'inscripcion.show']);

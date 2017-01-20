@@ -1,0 +1,1 @@
+{{$inscripcion->id_inscripcion}}
