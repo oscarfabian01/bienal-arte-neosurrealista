@@ -81,7 +81,8 @@ class InscripcionController extends Controller
             'obr.tipo_obra',
             'obr.valor_venta'
             )
-        ->where('ins.id', '=', $id);
+        ->where('ins.id', '=', $id)
+        ->first();
 
         return view('inscripcion', compact('inscripcion'));
     }
