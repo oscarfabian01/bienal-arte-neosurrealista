@@ -22,4 +22,8 @@ Route::get('inscripciones', ['uses' => 'InscripcionController@index', 'as' => 'i
 //Route::resource('inscripciones', 'InscripcionController');
 
 //Route::get('inscripciones', 'InscripcionController@index');
-Route::get('inscripcion/{id}',['uses' => 'InscripcionController@show', 'as' => 'inscripcion.show']);
+Route::get('inscripcion/{id}', ['uses' => 'InscripcionController@show', 'as' => 'inscripcion.show']);
+
+Route::get('registro', ['uses' => 'InscripcionController@create', 'as' => 'inscripcion.create']);
+
+Route::post('inscripcionform', ['uses' => 'InscripcionController@store', 'as' => 'inscripcion.store']);
