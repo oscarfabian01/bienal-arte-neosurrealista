@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Artista;
 use App\payuFactura;
 use Illuminate\Http\Request;
 
@@ -168,7 +166,7 @@ class InscripcionController extends Controller
             'art.direccion_postal',
             'art.email',
             'art.telefono_movil',
-            'art.perfil_artista',
+            'art.perfil_artista_id',
             'art.ruta_hoja_vida',
             'obr.titulo',
             'obr.sintesis_conceptual',
