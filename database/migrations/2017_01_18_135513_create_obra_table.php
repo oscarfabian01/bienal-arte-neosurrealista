@@ -20,12 +20,16 @@ class CreateObraTable extends Migration
             $table->string('ruta_fotos_obra')->comment('Ubicación del archivo de las fotos de la obra');
             $table->string('tipo_obra')->comment('Tipo de obra Pintara, Escultura, ETC.');
             $table->integer('alto_medida')->comment('Alto de la obra en cm');
-            $table->integer('ancho_medida')->comment('ancho de la obra en cm');
-            $table->integer('peso')->comment('Peso de la obra en kg');
-            $table->string('tema')->comment('Tema de la obra');
-            $table->string('tecnica')->comment('Técnica de la obra');
-            $table->double('valor_venta')->comment('Valor de venta de la obra');
+            $table->integer('ancho_medida')->nullable()->comment('ancho de la obra en cm');
+            $table->integer('peso')->nullable()->comment('Peso de la obra en kg');
+            $table->integer('tema')->unsigned()->comment('Tema de la obra');
+            $table->integer('tecnica')->unsigned()->comment('Técnica de la obra');
+            $table->double('valor_venta')->nullable()->comment('Valor de venta de la obra');
             $table->timestamps();
+
+            //Llaves foraneas
+            $table->foreign('tema')->references('id')->on('tema_obra');
+            $table->foreign('tecnica')->references('id')->on('tecnica_obra');
         });
     }
 

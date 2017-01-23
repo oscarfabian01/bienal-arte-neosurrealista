@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-
+        $this->call(TemaObraTableSeeder::class);
+        $this->call(TecnicaObraTableSeeder::class);
+        $this->call(PaisTableSeeder::class);
+        
         Model::reguard();
     }
 }

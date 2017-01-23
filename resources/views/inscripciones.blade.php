@@ -6,12 +6,20 @@
 	{!!Form::open(['route' => 'inscripcion.index', 'method'=>'GET', 'id'=>'form-filtros', 'class'=>'form-inline' ])!!}
 		{!!csrf_field()!!}
 		<div class='form-group'>
+			<label for='id'>ID</label>
+			<input type="text" name="id" value="{{$request->id}}">
+		</div>
+		<div class='form-group'>
 			<label for='nombre'>Nombre</label>
-			<input type="text" name="nombre">
+			<input type="text" name="nombre" value="{{$request->nombre}}">
 		</div>
 		<div class='form-group'>
 			<label for='apellido'>Apellido</label>
-			<input type="text" name="apellido">
+			<input type="text" name="apellido" value="{{$request->apellido}}">
+		</div>
+		<div class='form-group'>
+			<label for='titulo'>Título</label>
+			<input type="text" name="titulo" value="{{$request->titulo}}">
 		</div>
 		<button>Enviar</button>
 	{!!Form::close()!!}
@@ -31,9 +39,6 @@
 				</th>
 				<th>
 					Titulo
-				</th>
-				<th>
-					Tipo obra
 				</th>
 				<th>
 					Valor venta
@@ -59,13 +64,10 @@
 						{{$inscripcion->titulo}}
 					</td>
 					<td>
-						{{$inscripcion->tipo_obra}}
-					</td>
-					<td>
 						{{$inscripcion->valor_venta}}
 					</td>
 					<td>
-						<a href=''>Ver</a>
+						<a href='{{route("inscripcion.show",$inscripcion->id_inscripcion)}}'>Ver</a>
 					</td>
 				</tr>
 			@endforeach
